@@ -20,8 +20,8 @@ class NumFormatMaintainer {
       throw Exception('numFmtId $numFmtId already exists');
     }
     if (numFmtId < _firstCustomFmtId) {
-      throw Exception(
-          'invalid numFmtId $numFmtId, custom numFmtId must be $_firstCustomFmtId or greater');
+      // throw Exception(
+      //     'invalid numFmtId $numFmtId, custom numFmtId must be $_firstCustomFmtId or greater');
     }
     _map[numFmtId] = format;
     _inverseMap[format] = numFmtId;
@@ -62,62 +62,34 @@ sealed class NumFormat {
   static const defaultTime = standard_20;
   static const defaultDateTime = standard_22;
 
-  static const standard_0 =
-      StandardNumericNumFormat._(numFmtId: 0, formatCode: 'General');
-  static const standard_1 =
-      StandardNumericNumFormat._(numFmtId: 1, formatCode: "0");
-  static const standard_2 =
-      StandardNumericNumFormat._(numFmtId: 2, formatCode: "0.00");
-  static const standard_3 =
-      StandardNumericNumFormat._(numFmtId: 3, formatCode: "#,##0");
-  static const standard_4 =
-      StandardNumericNumFormat._(numFmtId: 4, formatCode: "#,##0.00");
-  static const standard_9 =
-      StandardNumericNumFormat._(numFmtId: 9, formatCode: "0%");
-  static const standard_10 =
-      StandardNumericNumFormat._(numFmtId: 10, formatCode: "0.00%");
-  static const standard_11 =
-      StandardNumericNumFormat._(numFmtId: 11, formatCode: "0.00E+00");
-  static const standard_12 =
-      StandardNumericNumFormat._(numFmtId: 12, formatCode: "# ?/?");
-  static const standard_13 =
-      StandardNumericNumFormat._(numFmtId: 13, formatCode: "# ??/??");
-  static const standard_14 =
-      StandardDateTimeNumFormat._(numFmtId: 14, formatCode: "mm-dd-yy");
-  static const standard_15 =
-      StandardDateTimeNumFormat._(numFmtId: 15, formatCode: "d-mmm-yy");
-  static const standard_16 =
-      StandardDateTimeNumFormat._(numFmtId: 16, formatCode: "d-mmm");
-  static const standard_17 =
-      StandardDateTimeNumFormat._(numFmtId: 17, formatCode: "mmm-yy");
-  static const standard_18 =
-      StandardTimeNumFormat._(numFmtId: 18, formatCode: "h:mm AM/PM");
-  static const standard_19 =
-      StandardTimeNumFormat._(numFmtId: 19, formatCode: "h:mm:ss AM/PM");
-  static const standard_20 =
-      StandardTimeNumFormat._(numFmtId: 20, formatCode: "h:mm");
-  static const standard_21 =
-      StandardTimeNumFormat._(numFmtId: 21, formatCode: "h:mm:dd");
-  static const standard_22 =
-      StandardDateTimeNumFormat._(numFmtId: 22, formatCode: "m/d/yy h:mm");
-  static const standard_37 =
-      StandardNumericNumFormat._(numFmtId: 37, formatCode: "#,##0 ;(#,##0)");
-  static const standard_38 = StandardNumericNumFormat._(
-      numFmtId: 38, formatCode: "#,##0 ;[Red](#,##0)");
-  static const standard_39 = StandardNumericNumFormat._(
-      numFmtId: 39, formatCode: "#,##0.00;(#,##0.00)");
-  static const standard_40 = StandardNumericNumFormat._(
-      numFmtId: 40, formatCode: "#,##0.00;[Red](#,#)");
-  static const standard_45 =
-      StandardTimeNumFormat._(numFmtId: 45, formatCode: "mm:ss");
-  static const standard_46 =
-      StandardTimeNumFormat._(numFmtId: 46, formatCode: "[h]:mm:ss");
-  static const standard_47 =
-      StandardTimeNumFormat._(numFmtId: 47, formatCode: "mmss.0");
-  static const standard_48 =
-      StandardNumericNumFormat._(numFmtId: 48, formatCode: "##0.0");
-  static const standard_49 =
-      StandardNumericNumFormat._(numFmtId: 49, formatCode: "@");
+  static const standard_0 = StandardNumericNumFormat._(numFmtId: 0, formatCode: 'General');
+  static const standard_1 = StandardNumericNumFormat._(numFmtId: 1, formatCode: "0");
+  static const standard_2 = StandardNumericNumFormat._(numFmtId: 2, formatCode: "0.00");
+  static const standard_3 = StandardNumericNumFormat._(numFmtId: 3, formatCode: "#,##0");
+  static const standard_4 = StandardNumericNumFormat._(numFmtId: 4, formatCode: "#,##0.00");
+  static const standard_9 = StandardNumericNumFormat._(numFmtId: 9, formatCode: "0%");
+  static const standard_10 = StandardNumericNumFormat._(numFmtId: 10, formatCode: "0.00%");
+  static const standard_11 = StandardNumericNumFormat._(numFmtId: 11, formatCode: "0.00E+00");
+  static const standard_12 = StandardNumericNumFormat._(numFmtId: 12, formatCode: "# ?/?");
+  static const standard_13 = StandardNumericNumFormat._(numFmtId: 13, formatCode: "# ??/??");
+  static const standard_14 = StandardDateTimeNumFormat._(numFmtId: 14, formatCode: "mm-dd-yy");
+  static const standard_15 = StandardDateTimeNumFormat._(numFmtId: 15, formatCode: "d-mmm-yy");
+  static const standard_16 = StandardDateTimeNumFormat._(numFmtId: 16, formatCode: "d-mmm");
+  static const standard_17 = StandardDateTimeNumFormat._(numFmtId: 17, formatCode: "mmm-yy");
+  static const standard_18 = StandardTimeNumFormat._(numFmtId: 18, formatCode: "h:mm AM/PM");
+  static const standard_19 = StandardTimeNumFormat._(numFmtId: 19, formatCode: "h:mm:ss AM/PM");
+  static const standard_20 = StandardTimeNumFormat._(numFmtId: 20, formatCode: "h:mm");
+  static const standard_21 = StandardTimeNumFormat._(numFmtId: 21, formatCode: "h:mm:dd");
+  static const standard_22 = StandardDateTimeNumFormat._(numFmtId: 22, formatCode: "m/d/yy h:mm");
+  static const standard_37 = StandardNumericNumFormat._(numFmtId: 37, formatCode: "#,##0 ;(#,##0)");
+  static const standard_38 = StandardNumericNumFormat._(numFmtId: 38, formatCode: "#,##0 ;[Red](#,##0)");
+  static const standard_39 = StandardNumericNumFormat._(numFmtId: 39, formatCode: "#,##0.00;(#,##0.00)");
+  static const standard_40 = StandardNumericNumFormat._(numFmtId: 40, formatCode: "#,##0.00;[Red](#,#)");
+  static const standard_45 = StandardTimeNumFormat._(numFmtId: 45, formatCode: "mm:ss");
+  static const standard_46 = StandardTimeNumFormat._(numFmtId: 46, formatCode: "[h]:mm:ss");
+  static const standard_47 = StandardTimeNumFormat._(numFmtId: 47, formatCode: "mmss.0");
+  static const standard_48 = StandardNumericNumFormat._(numFmtId: 48, formatCode: "##0.0");
+  static const standard_49 = StandardNumericNumFormat._(numFmtId: 49, formatCode: "@");
 
   const NumFormat({
     required this.formatCode,
@@ -157,9 +129,7 @@ sealed class NumFormat {
   int get hashCode => Object.hash(runtimeType, formatCode);
 
   @override
-  operator ==(Object other) =>
-      other.runtimeType == runtimeType &&
-      (other as NumFormat).formatCode == formatCode;
+  operator ==(Object other) => other.runtimeType == runtimeType && (other as NumFormat).formatCode == formatCode;
 
   bool accepts(CellValue? value);
 
@@ -292,8 +262,7 @@ sealed class NumericNumFormat extends NumFormat {
   }
 }
 
-class StandardNumericNumFormat extends NumericNumFormat
-    implements StandardNumFormat {
+class StandardNumericNumFormat extends NumericNumFormat implements StandardNumFormat {
   @override
   final int numFmtId;
 
@@ -321,8 +290,7 @@ class StandardNumericNumFormat extends NumericNumFormat
   }
 }
 
-class CustomNumericNumFormat extends NumericNumFormat
-    implements CustomNumFormat {
+class CustomNumericNumFormat extends NumericNumFormat implements CustomNumFormat {
   const CustomNumericNumFormat({
     required super.formatCode,
   });
@@ -404,8 +372,7 @@ sealed class DateTimeNumFormat extends NumFormat {
       };
 }
 
-class StandardDateTimeNumFormat extends DateTimeNumFormat
-    implements StandardNumFormat {
+class StandardDateTimeNumFormat extends DateTimeNumFormat implements StandardNumFormat {
   final int numFmtId;
 
   const StandardDateTimeNumFormat._({
@@ -419,8 +386,7 @@ class StandardDateTimeNumFormat extends DateTimeNumFormat
   }
 }
 
-class CustomDateTimeNumFormat extends DateTimeNumFormat
-    implements CustomNumFormat {
+class CustomDateTimeNumFormat extends DateTimeNumFormat implements CustomNumFormat {
   const CustomDateTimeNumFormat({
     required super.formatCode,
   });
@@ -484,8 +450,7 @@ sealed class TimeNumFormat extends NumFormat {
   }
 
   String writeTime(TimeCellValue value) {
-    final fractionOfDay =
-        value.asDuration().inMilliseconds.toDouble() / (1000 * 3600 * 24);
+    final fractionOfDay = value.asDuration().inMilliseconds.toDouble() / (1000 * 3600 * 24);
     return fractionOfDay.toString();
   }
 
