@@ -13,6 +13,17 @@ class _SharedStringsMaintainer {
     return _mapString[val];
   }
 
+  // 추가: length getter
+  int get length => _list.length;
+
+  /// 파싱 시 사용 - 중복 여부 상관없이 무조건 리스트에 추가하여 인덱스 유지
+  void addForParsing(SharedString val, String key) {
+    _list.add(val);
+    _mapString.putIfAbsent(key, () => val);
+    _map.putIfAbsent(val, () => _IndexingHolder(_list.length - 1));
+    _index = _list.length;
+  }
+
   SharedString addFromString(String val) {
     final newSharedString = SharedString(
         node: XmlElement(XmlName('si'), [], [
