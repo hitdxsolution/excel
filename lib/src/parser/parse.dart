@@ -569,30 +569,62 @@ class Parser {
     switch (type) {
       // sharedString
       case 's':
-        final sharedString = _excel._sharedStrings.value(int.parse(_parseValue(node.findElements('v').first)));
-        if (sharedString == null) {
-          value = null;
+        final vElement = node.findElements('v').firstOrNull;
+        if (vElement == null) {
+          print("case 's' vElement is null");
+          value = TextCellValue("");
           break;
         }
+
+        final index = int.tryParse(_parseValue(vElement));
+        if (index == null) {
+          print("case 's' index is null");
+          value = TextCellValue("");
+          break;
+        }
+
+        final sharedString = _excel._sharedStrings.value(index);
+        if (sharedString == null) {
+          print("case 's' sharedString is null");
+          value = TextCellValue("");
+          break;
+        }
+
         value = TextCellValue.span(sharedString.textSpan);
         break;
+
       // boolean
       case 'b':
-        value = BoolCellValue(_parseValue(node.findElements('v').first) == '1');
+        final vElement = node.findElements('v').firstOrNull;
+        if (vElement == null) {
+          value = BoolCellValue(false);
+          break;
+        }
+        value = BoolCellValue(_parseValue(vElement) == '1');
         break;
+
       // error
       case 'e':
       // formula
       case 'str':
-        value = FormulaCellValue(_parseValue(node.findElements('v').first));
+        final vElement = node.findElements('v').firstOrNull;
+        if (vElement == null) {
+          value = TextCellValue("");
+          break;
+        }
+        value = FormulaCellValue(_parseValue(vElement));
         break;
+
       // inline string
       case 'inlineStr':
-        // <c r='B2' t='inlineStr'>
-        // <is><t>Dartonico</t></is>
-        // </c>
-        value = TextCellValue(_parseValue(node.findAllElements('t').first));
+        final tElement = node.findAllElements('t').firstOrNull;
+        if (tElement == null) {
+          value = TextCellValue("");
+          break;
+        }
+        value = TextCellValue(_parseValue(tElement));
         break;
+
       // number
       case 'n':
       default:
@@ -605,10 +637,14 @@ class Parser {
             value = null;
           } else if (s1 != null) {
             final v = _parseValue(vNode);
+            // s 인덱스 범위 체크
+            if (s >= _excel._numFmtIds.length) {
+              value = NumFormat.defaultNumeric.read(v);
+              break;
+            }
             var numFmtId = _excel._numFmtIds[s];
             final numFormat = _excel._numFormats.getByNumFmtId(numFmtId);
             if (numFormat == null) {
-              // assert(false, 'found no number format spec for numFmtId $numFmtId');
               value = NumFormat.defaultNumeric.read(v);
             } else {
               value = numFormat.read(v);
@@ -620,10 +656,13 @@ class Parser {
         }
     }
 
+    // cellStyle 인덱스 범위 체크
+    final cellStyle = (s >= 0 && s < _excel._cellStyleList.length) ? _excel._cellStyleList[s] : null;
+
     sheetObject.updateCell(
       CellIndex.indexByColumnRow(columnIndex: columnIndex, rowIndex: rowIndex),
       value,
-      cellStyle: _excel._cellStyleList[s],
+      cellStyle: cellStyle,
     );
   }
 
